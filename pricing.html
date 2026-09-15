@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kenn B Media — Real Estate Pricing</title>
+<meta name="description" content="Real estate photography pricing — Kenn B Media, Canberra + NSW.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #15171b;
+    --surface: #1d2024;
+    --surface-2: #24272c;
+    --line: #33373d;
+    --text: #ece9e3;
+    --text-dim: #9a978f;
+    --accent: #c9793f;
+    --accent-soft: #e0a878;
+    --accent-2: #4a7a6e;
+    --display: 'Bebas Neue', 'Arial Narrow', sans-serif;
+    --body: 'Work Sans', system-ui, -apple-system, sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img { max-width: 100%; display: block; }
+  a { color: inherit; }
+
+  .wrap {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding-inline: 24px;
+  }
+
+  /* ---------- Nav ---------- */
+  header.nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(21, 23, 27, 0.88);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 16px;
+  }
+  .nav-mark {
+    font-family: var(--display);
+    font-size: 1.5rem;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .nav-links a {
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    transition: color 0.15s ease;
+  }
+  .nav-links a:hover { color: var(--accent-soft); }
+  @media (max-width: 560px) { .nav-links { gap: 16px; } }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 22px;
+    border-radius: 3px;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 600;
+    border: 1px solid transparent;
+    transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-primary { background: var(--accent); color: #17130f; }
+  .btn-primary:hover { background: var(--accent-soft); }
+  .btn-ghost { border-color: var(--line); color: var(--text); }
+  .btn-ghost:hover { border-color: var(--accent-soft); color: var(--accent-soft); }
+
+  /* ---------- Page header ---------- */
+  .page-head { padding-block: 56px 40px; }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-soft);
+    margin: 0 0 18px;
+  }
+  .eyebrow a { color: var(--text-dim); text-decoration: none; }
+  .eyebrow a:hover { color: var(--accent-soft); }
+  h1.headline {
+    font-family: var(--display);
+    font-size: clamp(2.6rem, 6vw, 4rem);
+    line-height: 0.98;
+    letter-spacing: 0.01em;
+    margin: 0 0 16px;
+    text-wrap: balance;
+  }
+  .page-lead {
+    font-size: 1.05rem;
+    color: var(--text-dim);
+    max-width: 56ch;
+    margin: 0;
+  }
+
+  /* ---------- Pricing ---------- */
+  section.pricing { padding-block: 24px 64px; border-top: none; }
+  .price-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  @media (max-width: 700px) { .price-grid { grid-template-columns: 1fr; } }
+
+  .price-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+  }
+  .price-card .tier-name {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent-soft);
+    margin: 0 0 14px;
+  }
+  .price-card .tier-amount {
+    font-family: var(--display);
+    font-size: 3.2rem;
+    line-height: 1;
+    margin: 0 0 6px;
+  }
+  .price-card .tier-amount sup {
+    font-family: var(--mono);
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    top: -1.2em;
+  }
+  .price-card .tier-sub {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    margin: 0 0 24px;
+  }
+  .price-card ul {
+    margin: 0 0 28px;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+  }
+  .price-card li {
+    font-size: 0.92rem;
+    padding-left: 18px;
+    position: relative;
+  }
+  .price-card li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 7px;
+    height: 1px;
+    background: var(--accent);
+  }
+  .price-card .btn { align-self: flex-start; }
+  .price-card.featured { border-color: var(--accent); }
+
+  .price-note {
+    margin-top: 28px;
+    padding: 18px 20px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    font-size: 0.9rem;
+    color: var(--text-dim);
+  }
+  .price-note strong { color: var(--text); font-weight: 600; }
+
+  /* ---------- Footer ---------- */
+  footer {
+    border-top: 1px solid var(--line);
+    padding-block: 26px;
+    margin-top: 40px;
+  }
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--text-dim);
+  }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="nav-mark" href="index.html">KENN&nbsp;B&nbsp;MEDIA</a>
+    <ul class="nav-links">
+      <li><a href="index.html#services">Services</a></li>
+      <li><a href="index.html#work">Work</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+  <section class="wrap page-head">
+    <p class="eyebrow"><a href="index.html">&larr; Kenn B Media</a></p>
+    <h1 class="headline">Real Estate Pricing</h1>
+    <p class="page-lead">Two packages covering everything from a quick rental listing to a full sales shoot. Every image is fully edited before delivery — straightened, color corrected, and ready to upload.</p>
+  </section>
+
+  <section class="wrap pricing">
+    <div class="price-grid">
+      <div class="price-card">
+        <p class="tier-name">Rental Listing</p>
+        <p class="tier-amount"><sup>$</sup>160</p>
+        <p class="tier-sub">For rental properties and quick-turn listings</p>
+        <ul>
+          <li>Up to 20 edited photos</li>
+          <li>Interior &amp; exterior coverage</li>
+          <li>High-resolution, listing-ready files</li>
+          <li>Delivered digitally</li>
+        </ul>
+        <a class="btn btn-ghost" href="index.html?service=Real%20Estate#contact">Book this package</a>
+      </div>
+
+      <div class="price-card featured">
+        <p class="tier-name">Sales Listing</p>
+        <p class="tier-amount"><sup>$</sup>250</p>
+        <p class="tier-sub">Full coverage for a property going to market</p>
+        <ul>
+          <li>Up to 30 edited photos</li>
+          <li>Full interior &amp; exterior coverage</li>
+          <li>High-resolution, listing-ready files</li>
+          <li>Delivered digitally</li>
+        </ul>
+        <a class="btn btn-primary" href="index.html?service=Real%20Estate#contact">Book this package</a>
+      </div>
+    </div>
+
+    <p class="price-note"><strong>Something bigger, or a bit different?</strong> Larger properties, styled walkthrough video, or shoots outside central Canberra can affect pricing — <a href="index.html?service=Real%20Estate#contact" style="color:var(--accent-soft);">get in touch</a> and I'll put a quote together.</p>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap footer-inner">
+    <span>&copy; <span id="year"></span> Kenn B Media</span>
+    <span>Real Estate + Events — Canberra &amp; NSW</span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>

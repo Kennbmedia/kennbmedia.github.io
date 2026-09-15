@@ -241,6 +241,11 @@
     height: 1px;
     background: var(--accent);
   }
+  .service-cta {
+    margin-top: 20px;
+    padding: 10px 18px;
+    font-size: 0.78rem;
+  }
 
   /* ---------- Portfolio ---------- */
   .grid {
@@ -293,34 +298,8 @@
   .grid figure:hover figcaption { opacity: 1; }
 
   /* ---------- About ---------- */
-  .about {
-    display: grid;
-    grid-template-columns: 0.9fr 1.1fr;
-    gap: 48px;
-    align-items: start;
-  }
-  @media (max-width: 800px) { .about { grid-template-columns: 1fr; gap: 24px; } }
   .about p { font-size: 1.02rem; color: var(--text-dim); margin: 0 0 16px; max-width: 60ch; }
   .about p strong { color: var(--text); font-weight: 600; }
-  .specs {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    border: 1px solid var(--line);
-    border-radius: 4px;
-    overflow: hidden;
-  }
-  .specs .row {
-    display: flex;
-    justify-content: space-between;
-    padding: 14px 18px;
-    border-bottom: 1px solid var(--line);
-    font-family: var(--mono);
-    font-size: 0.82rem;
-  }
-  .specs .row:last-child { border-bottom: none; }
-  .specs .row span:first-child { color: var(--text-dim); }
-  .specs .row span:last-child { color: var(--text); text-align: right; }
 
   /* ---------- Contact ---------- */
   .contact {
@@ -470,7 +449,7 @@
     <div>
       <p class="eyebrow">Canberra + NSW</p>
       <h1 class="headline">Real estate &amp;<br>events, shot with<br><span class="accent">intent.</span></h1>
-      <p class="hero-sub">Kenn B Media covers listings and live events with photo and video built for how people actually scroll — clean, steady, and ready to post the same day.</p>
+      <p class="hero-sub">Kenn B Media covers listings and live events with photo and video built for how people actually scroll — clean, steady, no fuss.</p>
       <div class="cta-row">
         <a class="btn btn-primary" href="#contact">Book a shoot</a>
         <a class="btn btn-ghost" href="#work">See the work</a>
@@ -497,6 +476,7 @@
           <li>Cinematic walkthroughs</li>
           <li>Same-week turnaround</li>
         </ul>
+        <a class="btn btn-ghost service-cta" href="pricing.html">See pricing breakdown <span aria-hidden="true">&rarr;</span></a>
       </div>
       <div class="service-card">
         <p class="num">02 — LIVE</p>
@@ -507,6 +487,7 @@
           <li>Vendor &amp; stallholder features</li>
           <li>Highlight reels, delivered fast</li>
         </ul>
+        <a class="btn btn-ghost service-cta" href="?service=Event#contact">Get a quote <span aria-hidden="true">&rarr;</span></a>
       </div>
     </div>
   </section>
@@ -531,18 +512,9 @@
       <h2 class="section-title">About</h2>
     </div>
     <div class="about">
-      <div class="specs">
-        <div class="row"><span>Based</span><span>Canberra, NSW</span></div>
-        <div class="row"><span>Focus</span><span>Real Estate · Events</span></div>
-        <div class="row"><span>Turnaround</span><span>3–5 days</span></div>
-        <div class="row"><span>Kit</span><span>Sony · Gimbal-stabilised</span></div>
-        <div class="row"><span>Status</span><span>Booking now</span></div>
-      </div>
-      <div>
-        <p><strong>Kenn B Media is a one-man crew</strong> — I shoot, edit and deliver everything myself, so what you see here is exactly what shows up on the day.</p>
-        <p>Started out documenting the everyday and moved into real estate and events because I like the pressure of a fixed deadline and a space that has to look right the first time. Every shoot gets the same treatment: steady footage, honest color, and a same-week turnaround so the listing or the recap goes up while it's still relevant.</p>
-        <p>Currently building out coverage across Canberra and NSW — always up for a new property, market, or event.</p>
-      </div>
+      <p><strong>Kenn B Media is a one-man crew</strong> — I shoot, edit and deliver everything myself, so what you see here is exactly what shows up on the day.</p>
+      <p>Started out documenting the everyday and moved into real estate and events because I like the pressure of a fixed deadline and a space that has to look right the first time. Every shoot gets the same treatment: steady footage and honest color.</p>
+      <p>Currently building out coverage across Canberra and NSW — always up for a new property, market, or event.</p>
     </div>
   </section>
 
@@ -600,6 +572,17 @@
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Pre-select the service dropdown when arriving via a "Get a quote" link, e.g. ?service=Event
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const service = params.get('service');
+    const serviceSelect = document.getElementById('cf-service');
+    if (service && serviceSelect) {
+      const match = Array.from(serviceSelect.options).find(o => o.value === service);
+      if (match) serviceSelect.value = service;
+    }
+  } catch (err) { /* no-op */ }
 
   const form = document.getElementById('contact-form');
   const status = document.getElementById('form-status');

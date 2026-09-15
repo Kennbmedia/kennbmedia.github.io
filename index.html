@@ -499,10 +499,13 @@
     </div>
     <div class="grid">
       <figure><img src="images/exterior.jpg" alt="Exterior driveway view of a residential property"><figcaption>Exterior</figcaption></figure>
-      <figure><img src="images/kitchen.jpg" alt="Kitchen interior, wide angle"><figcaption>Kitchen</figcaption></figure>
-      <figure><img src="images/sunroom.jpg" alt="Sunroom, wide angle"><figcaption>Sunroom</figcaption></figure>
-      <figure><img src="images/bedroom.jpg" alt="Bedroom, wide angle"><figcaption>Bedroom</figcaption></figure>
       <figure><img src="images/entry.jpg" alt="Front steps and entryway"><figcaption>Entry</figcaption></figure>
+      <figure><img src="images/kitchen.jpg" alt="Kitchen interior, wide angle"><figcaption>Kitchen</figcaption></figure>
+      <figure><img src="images/kitchen-detail.jpg" alt="Kitchen interior, close angle"><figcaption>Kitchen</figcaption></figure>
+      <figure><img src="images/sunroom.jpg" alt="Sunroom, wide angle"><figcaption>Sunroom</figcaption></figure>
+      <figure><img src="images/sunroom-detail.jpg" alt="Sunroom, styled tabletop detail"><figcaption>Sunroom</figcaption></figure>
+      <figure><img src="images/bedroom.jpg" alt="Bedroom, wide angle"><figcaption>Bedroom</figcaption></figure>
+      <figure><img src="images/kids-bedroom.jpg" alt="Kids' bedroom, wide angle"><figcaption>Bedroom</figcaption></figure>
       <figure><img src="images/patio.jpg" alt="Exterior patio area"><figcaption>Patio</figcaption></figure>
     </div>
   </section>
@@ -550,6 +553,14 @@
             <option value="Other">Something else</option>
           </select>
         </div>
+        <div class="field" id="cf-package-field" hidden>
+          <label for="cf-package">Which package?</label>
+          <select id="cf-package" name="package">
+            <option value="Rental Listing">Rental Listing — $160</option>
+            <option value="Sales Listing">Sales Listing — $250</option>
+            <option value="Not sure yet">Not sure yet</option>
+          </select>
+        </div>
         <div class="field">
           <label for="cf-message">Details</label>
           <textarea id="cf-message" name="message" rows="4" required placeholder="Property address or event date, location, what you need..."></textarea>
@@ -573,16 +584,35 @@
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Pre-select the service dropdown when arriving via a "Get a quote" link, e.g. ?service=Event
+  // Show the "which package?" field only when Real Estate is selected
+  const serviceSelect = document.getElementById('cf-service');
+  const packageField = document.getElementById('cf-package-field');
+  const packageSelect = document.getElementById('cf-package');
+  function syncPackageField() {
+    if (!serviceSelect || !packageField) return;
+    packageField.hidden = serviceSelect.value !== 'Real Estate';
+  }
+  if (serviceSelect) {
+    serviceSelect.addEventListener('change', syncPackageField);
+  }
+
+  // Pre-fill the service (and, for real estate, package) dropdowns when arriving via
+  // a "Get a quote" or "Book this package" link, e.g. ?service=Real%20Estate&package=Sales%20Listing
   try {
     const params = new URLSearchParams(window.location.search);
     const service = params.get('service');
-    const serviceSelect = document.getElementById('cf-service');
+    const pkg = params.get('package');
     if (service && serviceSelect) {
       const match = Array.from(serviceSelect.options).find(o => o.value === service);
       if (match) serviceSelect.value = service;
     }
+    if (pkg && packageSelect) {
+      const match = Array.from(packageSelect.options).find(o => o.value === pkg);
+      if (match) packageSelect.value = pkg;
+    }
   } catch (err) { /* no-op */ }
+
+  syncPackageField();
 
   const form = document.getElementById('contact-form');
   const status = document.getElementById('form-status');
